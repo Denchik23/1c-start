@@ -1,0 +1,12 @@
+*.log
+*.pdf
+*.xls
+*.png
+*.jpeg
+
+favicon.ico
+.htaccess
+
+
+vendor/
+templates_c/
