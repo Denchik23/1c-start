@@ -3,22 +3,16 @@
 
 namespace App\Parser;
 
-use App\Parser\Contracts\ImportDataServiceInterface;
-
-class ImportEgrul extends ImportAbstract implements ImportDataServiceInterface
+class ImportEgrul extends ImportAbstract
 {
     private $strlenCod = 13;
 
 
     public function parserXml($fp)
     {
-        $contents = '';
-        while (!feof($fp)) {
-            $contents .= fread($fp, 2);
-        }
-        fclose($fp);
+
         $this->increaseСounter(['file']);
-        $xml = simplexml_load_string($contents);
+        $xml = simplexml_load_file($fp);
         if (!$xml) {
             return;
         }
@@ -32,6 +26,10 @@ class ImportEgrul extends ImportAbstract implements ImportDataServiceInterface
         }
         //ddd($this->getDataImp());
         //ddd('stop',1);
+    }
+
+    public function writeData() {
+        $this->log->info('data', $this->getDataImp());
     }
 
 }
